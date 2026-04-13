@@ -13,7 +13,7 @@ MAX_DURATION = 26 * 60  # minutes
 # One API call per date; cap listed results after global sort
 MAX_RESULTS = 25
 
-OUTBOUND_DATES = ("2026-06-11", "2026-06-12", "2026-06-13")
+OUTBOUND_DATES = ("2026-07-13",)
 
 def serpapi_get(params):
     r = requests.get("https://serpapi.com/search", params={**params, "api_key": SERPAPI_KEY})
@@ -24,8 +24,8 @@ def fetch_one_way(outbound_date):
     return serpapi_get({
         "engine": "google_flights",
         "type": "2",
-        "departure_id": "SFO",
-        "arrival_id": "DEL",
+        "departure_id": "BOM",
+        "arrival_id": "SFO",
         "outbound_date": outbound_date,
         "max_duration": str(MAX_DURATION),
         "sort_by": "2",
@@ -71,8 +71,8 @@ def parse_and_combine():
     return combined[:MAX_RESULTS]
 
 def send_email(flights):
-    date_label = "Jun 11 / 12 / 13"
-    lines = [f"✈️  One-way SFO → DEL ({date_label}, 2026)  |  {datetime.now().date()}\n"]
+    date_label = "Jul 13"
+    lines = [f"✈️  One-way BOM → SFO ({date_label}, 2026)  |  {datetime.now().date()}\n"]
     lines.append("Max 26hr total | Sorted by price ascending")
     lines.append("=" * 80)
 
@@ -88,7 +88,7 @@ def send_email(flights):
 
     body = "\n".join(lines)
     msg = MIMEText(body)
-    msg["Subject"] = f"✈️ One-way SFO→DEL ({date_label}) — {datetime.now().date()}"
+    msg["Subject"] = f"✈️ One-way BOM→SFO ({date_label}) — {datetime.now().date()}"
     msg["From"] = GMAIL_USER
     msg["To"] = TO_EMAIL
 
