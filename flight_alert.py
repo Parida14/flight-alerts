@@ -13,7 +13,7 @@ MAX_DURATION = 23 * 60  # minutes
 # One API call per date; cap listed results after global sort
 MAX_RESULTS = 20
 
-OUTBOUND_DATES = ("2026-07-13",)
+OUTBOUND_DATES = ("2026-07-19",)
 
 def serpapi_get(params):
     r = requests.get("https://serpapi.com/search", params={**params, "api_key": SERPAPI_KEY})
@@ -24,7 +24,7 @@ def fetch_one_way(outbound_date):
     return serpapi_get({
         "engine": "google_flights",
         "type": "2",
-        "departure_id": "BOM",
+        "departure_id": "BOM,DEL",
         "arrival_id": "SFO",
         "outbound_date": outbound_date,
         "max_duration": str(MAX_DURATION),
