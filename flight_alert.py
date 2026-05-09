@@ -9,7 +9,7 @@ GMAIL_USER = os.environ["GMAIL_USER"]
 GMAIL_PASS = os.environ["GMAIL_APP_PASS"]
 TO_EMAIL = os.environ["TO_EMAIL"]
 
-MAX_DURATION = 23 * 60  # minutes
+MAX_DURATION = 25 * 60  # minutes
 # One API call per date; cap listed results after global sort
 MAX_RESULTS = 20
 
@@ -71,7 +71,7 @@ def parse_and_combine():
     return combined[:MAX_RESULTS]
 
 def send_email(flights):
-    date_label = "Jul 13"
+    date_label = "Jul 19"
     lines = [f"✈️  One-way BOM → SFO ({date_label}, 2026)  |  {datetime.now().date()}\n"]
     lines.append("Max 26hr total | Sorted by price ascending")
     lines.append("=" * 80)
