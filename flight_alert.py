@@ -9,7 +9,7 @@ GMAIL_USER = os.environ["GMAIL_USER"]
 GMAIL_PASS = os.environ["GMAIL_APP_PASS"]
 TO_EMAIL = os.environ["TO_EMAIL"]
 
-MAX_DURATION = 25 * 60  # minutes
+MAX_DURATION = 26 * 60  # minutes
 # One API call per date; cap listed results after global sort
 MAX_RESULTS = 20
 
