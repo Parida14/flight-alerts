@@ -13,7 +13,7 @@ MAX_DURATION = 26 * 60  # minutes
 # One API call per date; cap listed results after global sort
 MAX_RESULTS = 20
 
-OUTBOUND_DATES = ("2026-07-19",)
+OUTBOUND_DATES = ("2026-07-06","2026-07-07", "2026-07-08")
 
 def serpapi_get(params):
     r = requests.get("https://serpapi.com/search", params={**params, "api_key": SERPAPI_KEY})
