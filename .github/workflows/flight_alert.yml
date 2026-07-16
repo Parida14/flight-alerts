@@ -1,4 +1,4 @@
-name: Tue/Fri BOM/DEL→SFO Flight Alert
+name: Tue/Fri SFO→DEL Flight Alert
 
 on:
   schedule:

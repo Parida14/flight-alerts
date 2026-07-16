@@ -25,8 +25,8 @@ def fetch_one_way(outbound_date):
     return serpapi_get({
         "engine": "google_flights",
         "type": "2",
-        "departure_id": "BOM,DEL",
-        "arrival_id": "SFO",
+        "departure_id": "SFO",
+        "arrival_id": "DEL",
         "outbound_date": outbound_date,
         "max_duration": str(MAX_DURATION),
         "stops": "2",
@@ -95,7 +95,7 @@ def format_date_label(dates):
 
 def send_email(flights):
     date_label, year = format_date_label(OUTBOUND_DATES)
-    lines = [f"✈️  One-way BOM/DEL → SFO ({date_label}, {year})  |  {datetime.now().date()}\n"]
+    lines = [f"✈️  One-way SFO → DEL ({date_label}, {year})  |  {datetime.now().date()}\n"]
     lines.append(f"Direct or ≤1 stop | Max {MAX_DURATION // 60}hr total | Sorted by price ascending")
     lines.append("=" * 80)
 
@@ -111,7 +111,7 @@ def send_email(flights):
 
     body = "\n".join(lines)
     msg = MIMEText(body)
-    msg["Subject"] = f"✈️ One-way BOM/DEL→SFO ({date_label}, {year}) — {datetime.now().date()}"
+    msg["Subject"] = f"✈️ One-way SFO→DEL ({date_label}, {year}) — {datetime.now().date()}"
     msg["From"] = GMAIL_USER
     msg["To"] = TO_EMAIL
 
