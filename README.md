@@ -29,4 +29,4 @@ python flight_alert.py
 
 ## GitHub Actions
 
-[`.github/workflows/flight_alert.yml`](.github/workflows/flight_alert.yml) runs daily (scheduled) or on demand. Add the same variables as **repository secrets** in the repo settings.
+[`.github/workflows/flight_alert.yml`](.github/workflows/flight_alert.yml) runs on **Tuesdays and Fridays** at 8 AM PST (scheduled) or on demand via manual trigger. Add the same variables as **repository secrets** in the repo settings.
