@@ -1,4 +1,4 @@
-name: Tue/Fri BOM/DEL→SFO Flight Alert
+name: Tue/Fri SFO→DEL Flight Alert
 
 on:
   schedule:
@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install requests
+      - run: pip install -r requirements.txt
       - run: python flight_alert.py
         env:
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
