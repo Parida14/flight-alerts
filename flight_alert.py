@@ -13,7 +13,7 @@ MAX_DURATION = 26 * 60  # minutes
 # One API call per date; cap listed results after global sort
 MAX_RESULTS = 20
 
-OUTBOUND_DATES = ("2026-07-06","2026-07-07", "2026-07-08")
+OUTBOUND_DATES = ("2026-07-18", "2026-07-19", "2026-07-20")
 
 def serpapi_get(params):
     r = requests.get("https://serpapi.com/search", params={**params, "api_key": SERPAPI_KEY})
@@ -50,7 +50,11 @@ def summarize_flights(legs):
 
 def parse_and_combine():
     combined = []
+    today = datetime.now().date()
     for outbound_date in OUTBOUND_DATES:
+        if datetime.strptime(outbound_date, "%Y-%m-%d").date() < today:
+            print(f"Skipping past outbound date: {outbound_date}")
+            continue
         data = fetch_one_way(outbound_date)
         flights = data.get("best_flights", []) + data.get("other_flights", [])
         for f in flights:
@@ -70,8 +74,17 @@ def parse_and_combine():
     combined.sort(key=lambda x: x["price"])
     return combined[:MAX_RESULTS]
 
+def format_date_label(dates):
+    months = {1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun",
+              7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"}
+    parts = []
+    for d in dates:
+        dt = datetime.strptime(d, "%Y-%m-%d")
+        parts.append(f"{months[dt.month]} {dt.day}")
+    return " / ".join(parts) if len(parts) > 1 else parts[0]
+
 def send_email(flights):
-    date_label = "Jul 19"
+    date_label = format_date_label(OUTBOUND_DATES)
     lines = [f"✈️  One-way BOM → SFO ({date_label}, 2026)  |  {datetime.now().date()}\n"]
     lines.append("Max 26hr total | Sorted by price ascending")
     lines.append("=" * 80)

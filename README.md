@@ -1,12 +1,12 @@
 # flight-alerts
 
-Small script that queries [SerpAPI](https://serpapi.com/)’s Google Flights engine for **one-way** **SFO → DEL** itineraries, merges results across configured departure dates, sorts by **price**, and emails a summary.
+Small script that queries [SerpAPI](https://serpapi.com/)'s Google Flights engine for **one-way** **BOM/DEL → SFO** itineraries, merges results across configured departure dates, sorts by **price**, and emails a summary.
 
 ## What it searches
 
-- **Route:** San Francisco (SFO) → Delhi (DEL), one-way  
-- **Dates:** set in `OUTBOUND_DATES` in `flight_alert.py` (currently June 11–13, 2026)  
-- **Filters:** total itinerary duration capped at **26 hours**; results limited to **25** rows after sorting  
+- **Route:** Mumbai (BOM) or Delhi (DEL) → San Francisco (SFO), one-way  
+- **Dates:** set in `OUTBOUND_DATES` in `flight_alert.py` (currently July 18–20, 2026)  
+- **Filters:** total itinerary duration capped at **26 hours**; results limited to **20** rows after sorting  
 
 Change `OUTBOUND_DATES`, `MAX_DURATION`, or `MAX_RESULTS` in `flight_alert.py` if your trip or limits differ.
 
