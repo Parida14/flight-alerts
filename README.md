@@ -1,14 +1,34 @@
 # flight-alerts
 
-Small script that queries [SerpAPI](https://serpapi.com/)'s Google Flights engine for **one-way** **SFO → DEL** itineraries, merges results across configured departure dates, sorts by **price**, and emails a summary.
+Daily flight price alerts for a one-way **SFO → DEL** trip. The script queries [SerpAPI](https://serpapi.com/)'s Google Flights engine across configured departure dates, filters results, sorts by price, and emails a summary.
 
 ## What it searches
 
-- **Route:** San Francisco (SFO) → Delhi (DEL), one-way  
-- **Dates:** set in `OUTBOUND_DATES` in `flight_alert.py` (currently January 16–18, 2027)  
-- **Filters:** direct or **≤1 stop**; total itinerary duration capped at **24 hours**; results limited to **20** rows after sorting  
+| Setting | Value |
+|---------|-------|
+| **Route** | San Francisco (SFO) → Delhi (DEL), one-way |
+| **Dates** | January 16, 17, and 18, 2027 (`OUTBOUND_DATES` in `flight_alert.py`) |
+| **Stops** | Direct or ≤1 stop (`MAX_STOPS = 1`; SerpAPI `stops=2`) |
+| **Max duration** | 24 hours total (`MAX_DURATION = 24 * 60` minutes) |
+| **Results** | Top 20 cheapest itineraries after merging all dates (`MAX_RESULTS = 20`) |
+| **Currency** | USD |
 
-Change `OUTBOUND_DATES`, `MAX_DURATION`, `MAX_STOPS`, or `MAX_RESULTS` in `flight_alert.py` if your trip or limits differ.
+Past dates in `OUTBOUND_DATES` are skipped automatically at runtime. If no flights match, the alert email still sends with a "no qualifying flights" message.
+
+## Schedule
+
+GitHub Actions runs the alert on **Tuesdays and Fridays at 8:00 AM PST** (15:00 UTC). You can also trigger a run manually from the Actions tab.
+
+## Configuration
+
+Edit constants at the top of `flight_alert.py`:
+
+| Constant | Description |
+|----------|-------------|
+| `OUTBOUND_DATES` | Tuple of `YYYY-MM-DD` departure dates to search |
+| `MAX_DURATION` | Maximum total itinerary duration in minutes |
+| `MAX_STOPS` | Maximum number of stops (0 = nonstop only, 1 = direct or one stop) |
+| `MAX_RESULTS` | Number of cheapest itineraries to include in the email |
 
 ## Environment variables
 
@@ -22,11 +42,26 @@ Change `OUTBOUND_DATES`, `MAX_DURATION`, `MAX_STOPS`, or `MAX_RESULTS` in `fligh
 ## Run locally
 
 ```bash
-pip install requests
+pip install -r requirements.txt
 export SERPAPI_KEY=... GMAIL_USER=... GMAIL_APP_PASS=... TO_EMAIL=...
 python flight_alert.py
 ```
 
 ## GitHub Actions
 
-[`.github/workflows/flight_alert.yml`](.github/workflows/flight_alert.yml) runs on **Tuesdays and Fridays** at 8 AM PST (scheduled) or on demand via manual trigger. Add the same variables as **repository secrets** in the repo settings.
+Workflow: [`.github/workflows/flight_alert.yml`](.github/workflows/flight_alert.yml)
+
+Add the four environment variables above as **repository secrets** under Settings → Secrets and variables → Actions:
+
+- `SERPAPI_KEY`
+- `GMAIL_USER`
+- `GMAIL_APP_PASS`
+- `TO_EMAIL`
+
+## Project layout
+
+```
+flight_alert.py              # Search, filter, and email logic
+requirements.txt             # Python dependencies
+.github/workflows/flight_alert.yml  # Scheduled CI job
+```
