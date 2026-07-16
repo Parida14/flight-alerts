@@ -1,4 +1,4 @@
-name: Daily SFO→DEL Flight Alert
+name: Daily BOM/DEL→SFO Flight Alert
 
 on:
   schedule:

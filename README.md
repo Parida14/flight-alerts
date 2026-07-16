@@ -5,10 +5,10 @@ Small script that queries [SerpAPI](https://serpapi.com/)'s Google Flights engin
 ## What it searches
 
 - **Route:** Mumbai (BOM) or Delhi (DEL) → San Francisco (SFO), one-way  
-- **Dates:** set in `OUTBOUND_DATES` in `flight_alert.py` (currently July 18–20, 2026)  
-- **Filters:** total itinerary duration capped at **26 hours**; results limited to **20** rows after sorting  
+- **Dates:** set in `OUTBOUND_DATES` in `flight_alert.py` (currently January 16–18, 2027)  
+- **Filters:** direct or **≤1 stop**; total itinerary duration capped at **24 hours**; results limited to **20** rows after sorting  
 
-Change `OUTBOUND_DATES`, `MAX_DURATION`, or `MAX_RESULTS` in `flight_alert.py` if your trip or limits differ.
+Change `OUTBOUND_DATES`, `MAX_DURATION`, `MAX_STOPS`, or `MAX_RESULTS` in `flight_alert.py` if your trip or limits differ.
 
 ## Environment variables
 
