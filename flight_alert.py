@@ -14,7 +14,7 @@ MAX_STOPS = 1           # direct or 1 stop max (SerpAPI stops=2)
 # One API call per date; cap listed results after global sort
 MAX_RESULTS = 20
 
-OUTBOUND_DATES = ("2027-01-16", "2027-01-17", "2027-01-18")
+OUTBOUND_DATES = ("2027-01-15", "2027-01-16", "2027-01-17")
 
 def serpapi_get(params):
     r = requests.get("https://serpapi.com/search", params={**params, "api_key": SERPAPI_KEY})
