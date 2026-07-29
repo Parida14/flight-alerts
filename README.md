@@ -7,7 +7,7 @@ Daily flight price alerts for a one-way **SFO → DEL** trip. The script queries
 | Setting | Value |
 |---------|-------|
 | **Route** | San Francisco (SFO) → Delhi (DEL), one-way |
-| **Dates** | January 16, 17, and 18, 2027 (`OUTBOUND_DATES` in `flight_alert.py`) |
+| **Dates** | January 15, 16, and 17, 2027 (`OUTBOUND_DATES` in `flight_alert.py`) |
 | **Stops** | Direct or ≤1 stop (`MAX_STOPS = 1`; SerpAPI `stops=2`) |
 | **Max duration** | 24 hours total (`MAX_DURATION = 24 * 60` minutes) |
 | **Results** | Top 20 cheapest itineraries after merging all dates (`MAX_RESULTS = 20`) |
