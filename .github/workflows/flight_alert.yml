@@ -1,8 +1,8 @@
 name: Tue/Fri SFO→DEL Flight Alert
 
 on:
-  schedule:
-    - cron: "0 15 * * 2,5"  # 8AM PST on Tuesdays and Fridays (UTC-7)
+  # schedule:
+  #   - cron: "0 15 * * 2,5"  # 8AM PST on Tuesdays and Fridays (UTC-7)
   workflow_dispatch:       # manual trigger for testing
 
 jobs:

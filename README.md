@@ -17,7 +17,9 @@ Past dates in `OUTBOUND_DATES` are skipped automatically at runtime. If no fligh
 
 ## Schedule
 
-GitHub Actions runs the alert on **Tuesdays and Fridays at 8:00 AM PST** (15:00 UTC). You can also trigger a run manually from the Actions tab.
+Scheduled alerts are **paused** (the cron trigger in the workflow is commented out). You can still trigger a run manually from the Actions tab via `workflow_dispatch`.
+
+When re-enabled, the alert runs on **Tuesdays and Fridays at 8:00 AM PST** (15:00 UTC).
 
 ## Configuration
 
